@@ -7,4 +7,8 @@ const addNewFolder = function() {
     document.querySelector('#addNewFolder').classList.toggle('show')
 }
 
-export {addNewFolder}
+const addInFolder = function() {
+    document.querySelector('#addToDoToFolder').classList.toggle('hidden')
+    document.querySelector('#addToDoToFolder').classList.toggle('show')
+}
+export {addNewFolder, addInFolder}

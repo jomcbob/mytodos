@@ -84,3 +84,12 @@ header {
     border-radius: 5px;
     border: none;
 }
+
+.domTodo {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: beige;
+    padding: 10px;
+    font-size: x-large;
+}
+

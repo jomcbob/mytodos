@@ -1,13 +1,7 @@
 import "./styles.css";
-import { addNewFolder } from "./page1.js";
-// Brainstorm what kind of properties your todo-items are going to have.
-//  At a minimum they should have a title, description, dueDate and priority.
-//   You might also want to include notes or even a checklist.
-// The look of the User Interface is up to you, but it should be able to do the following:
-// View all projects.
-// View all todos in each project (probably just the title and duedate… perhaps changing color for different priorities).
-// Expand a single todo to see/edit its details.
-// Delete a todo.
+import { addNewFolder, addInFolder  } from "./page1.js";
+import { createToDos } from "./newArray.js";
+// import { createToDos } from "./newArray.js";
 
 let addNew = document.querySelector('#newFolder')
 let close = document.querySelector('.close')
@@ -33,8 +27,33 @@ add.addEventListener('click', () => {
     changBody(div)
 })
 
+let input1 = document.querySelector(".toDo")
+let input2 = document.querySelector("#description")
+let input3 = document.querySelector("#when")
+let input4 = document.querySelector("#priority")
 let changBody = function(div){
     div.addEventListener('click', () => {
         document.querySelector('.content').innerHTML = '<button class="newToDo">new to do</button>'
+        let newToDoButton = document.querySelector('.newToDo')
+        newToDoButton.addEventListener('click', () => {
+            addInFolder()
+            let add2 = document.querySelector('.add2')
+            add2.addEventListener('click', () => {
+                addInFolder()
+                let content = document.querySelector('.content')
+                content.innerHTML += `
+                <div class="domTodo">
+                    <div class='listOne'>${input1.value}</div>
+                    <div class='listTwo'>${input2.value}</div>
+                    <div class='listThree'>${input3.value}</div>
+                    <div class='listFour'>${input4.value}</div>
+                </div>
+                `
+                input1.value = ''
+                input2.value = ''
+                input3.value = ''
+                input4.value = ''
+            })
+        })
     })
 }

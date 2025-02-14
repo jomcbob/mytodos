@@ -9,6 +9,15 @@ class createToDos {
         }  // true for 'read', false for 'not read'
 
     giveValue(){
-        return ({title: this.title, description: this.description, dueDate: this.dueDate, priority: this.priority})
+        // return ({title: this.title, description: this.description, dueDate: this.dueDate, priority: this.priority})
     }
 }
+const makeToDo = function(title, description, dueDate, priority){
+
+}
+
+const makeFolder = function() {
+
+}
+
+export {createToDos}
