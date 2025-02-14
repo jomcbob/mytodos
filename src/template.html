@@ -1,11 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TO DO</title>
 </head>
+
 <body>
-    
+    <div id="addNewFolder" class="hidden">
+        <label for="newFolderName">new folder name</label>
+        <input type="text" name="newFolderName" class="folderInput">
+        <button class="add">add</button>
+        <button class="close">close</button>
+    </div>
+    <div class="container">
+        <header>
+            <h1>welcome please have fun</h1>
+        </header>
+        <div class="sidebar">
+            <h1 class="folders">Your folders</h1>
+            <h2 id="newFolder" class="hasHover">⊕ new Folder</h2>
+            <div class="yourFolders">
+
+            </div>
+        </div>
+        <div class="todos">
+            <div class="content"></div>
+        </div>
+    </div>
 </body>
+
 </html>
