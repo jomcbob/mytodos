@@ -1,8 +1,8 @@
-import { makeNewFolder } from "./page1"
-let folder = []
+import { makeNewFolder, checkpriority, seeMoreValues} from "./page1"
+let inbox = []
 
 const makeToDo = (title, description, dueDate, priority, isChecked) => {
-    folder.push({ title, description, dueDate, priority, isChecked })
+    inbox.push({ title, description, dueDate, priority, isChecked })
     refresh()
 }
 
@@ -11,8 +11,11 @@ const refresh = () => {
     content.innerHTML = ''
     const container = document.createElement('div')
 
-    folder.forEach((todo, index) => {
+    inbox.forEach((todo, index) => {
         const todoDiv = document.createElement('div')
+        let more = document.createElement('div')
+        more.classList.add('hover')
+        more.textContent = "⊕ more"
         todoDiv.classList.add('domTodo')
         todoDiv.innerHTML = `
         <div class='box'>
@@ -22,22 +25,25 @@ const refresh = () => {
             <div class='listOne'>Title: ${todo.title}</div>
         </div>
         <div class='box'>
-            <div class='listTwo'>What: ${todo.description}</div>
-        </div>
-        <div class='box'>
             <div class='listThree'>By when: ${todo.dueDate}</div>
         </div>
         <div class='box'>
-            <div class='listFour'>How urgent: ${todo.priority}</div>
+            <div class='listFour'>priority:<div class='toTurnColor'>&nbsp;${todo.priority}&nbsp;</div></div>
         </div>
         <div class='box'>
             <div id='delete${index}' class='hover'>❌</div>
         <div>
         `
+        const toStyle = todoDiv.querySelector('.toTurnColor')
+        checkpriority(todo, toStyle)
+
+        todoDiv.appendChild(more)
+
+        seeMoreValues(more, todo)
 
         const deleteBtn = todoDiv.querySelector(`#delete${index}`)
         deleteBtn.addEventListener("click", () => {
-            folder.splice(index, 1)
+            inbox.splice(index, 1)
             refresh()
         })
 

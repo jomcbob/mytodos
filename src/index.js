@@ -36,10 +36,16 @@ let input3 = document.querySelector('#when')
 let input4 = document.querySelector('#priority')
 let addTodoButton = document.querySelector('.add2')
 addTodoButton.addEventListener('click', () => {
-    makeToDo(input1.value, input2.value, input3.value, input4.value)
+    makeToDo(input1.value, input2.value, input3.value, input4.value,)
     document.querySelector('#addToDoToFolder').classList.toggle('hidden')
     document.querySelector('#addToDoToFolder').classList.toggle('show')
-    input1.value = ''; input2.value = '';
+    input1.value = ''; input2.value = ''; input3.value = '';
+})
+
+let closeAbout = document.querySelector('.closeAbout')
+closeAbout.addEventListener('click', () => {
+    document.querySelector('#lookUpValues').classList.toggle('hidden')
+    document.querySelector('#lookUpValues').classList.toggle('show')
 })
 
 

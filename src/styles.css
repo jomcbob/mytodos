@@ -110,7 +110,7 @@ input,select{
 
 .domTodo{
     display: grid;
-    grid-template-columns: .5fr 2fr 2fr 2fr 2fr .5fr;
+    grid-template-columns: .5fr 3fr 2fr 2fr .5fr 1fr;
     grid-template-rows: 1fr;
     background-color: beige;
     padding: 10px;
@@ -130,5 +130,25 @@ input[type="checkbox"] {
     margin: 0px;
     cursor: pointer;
     align-self: center;
+}
+
+.boxForLookUpValues {
+    background:rgb(0, 0, 0, .5);
+    color: white;
+    width: 70vh;
+    height: 70vh;
+    border-radius: 5px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 3vh;
+    overflow-wrap: break-word;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 2vh;
+}
+
+.listFour {
+    display: flex;
 }
 

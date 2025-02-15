@@ -15,25 +15,31 @@
         <button class="close">close</button>
     </div>
     <div id="addToDoToFolder" class="hidden">
-        <label for="ToDo">what</label>
+        <label for="ToDo">title</label>
         <input type="text" name="toDo" class="toDo">
         <label for="description">description</label>
         <input type="text" name="description" id="description">
         <label for="when">by when</label>
-        <select name="when" id="when">
-            <option value="today">today</option>
-            <option value="tomorrow">tomorrow</option>
-            <option value="when I can">when I can</option>
-        </select>
+        <input type="date" id="when">
         <label for="priority">priority</label>
         <select name="priority" id="priority">
-            <option value="top">top</option>
-            <option value="middle">middle</option>
-            <option value="bottom">bottom</option>
+            <option value="high" class="red">high</option>
+            <option value="medium" class="yellow">medium</option>
+            <option value="low" class="green">low</option>
         </select>
         <button class="add2">add</button>
         <button class="closeToDoButton">close</button>
     </div>
+
+    <div id="lookUpValues" class="hidden">
+        <div class="boxForLookUpValues">
+            <div class="appendToThis">
+
+            </div>
+        </div>
+        <button class="closeAbout">close</button>
+    </div>
+
     <div class="container">
         <header>
             <h1>welcome please have fun</h1>
@@ -42,7 +48,7 @@
             <h1 class="folders">Your folders</h1>
             <h2 id="newFolder" class="hasHover">⊕ new Folder</h2>
             <div class="yourFolders">
-
+                <div class="folderDiv hasHover">📂 Inbox</div>
             </div>
         </div>
         <div class="todos">
