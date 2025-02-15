@@ -1,8 +1,9 @@
-// import "./styles.css";
-// // page for new folders
+let folder = 'yo'
 
-// const addInFolder = function() {
-//     document.querySelector('#addToDoToFolder').classList.toggle('hidden')
-//     document.querySelector('#addToDoToFolder').classList.toggle('show')
-// }
-// export { addInFolder}
+const makeNewFolder = (title) => {
+    let currentFolder = [folder]
+    currentFolder.push({title})
+    console.log(currentFolder)
+}
+
+export {makeNewFolder}

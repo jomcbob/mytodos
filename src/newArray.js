@@ -1,7 +1,8 @@
+import { makeNewFolder } from "./page1"
 let folder = []
 
-const makeToDo = (title, description, dueDate, priority) => {
-    folder.push({ title, description, dueDate, priority })
+const makeToDo = (title, description, dueDate, priority, isChecked) => {
+    folder.push({ title, description, dueDate, priority, isChecked })
     refresh()
 }
 
@@ -14,19 +15,40 @@ const refresh = () => {
         const todoDiv = document.createElement('div')
         todoDiv.classList.add('domTodo')
         todoDiv.innerHTML = `
+        <div class='box'>
+            <input type='checkbox' id='isDone${index}' class='hover' name='check' value='${todo.isChecked}'>
+        </div>
+        <div class='box'>
             <div class='listOne'>Title: ${todo.title}</div>
+        </div>
+        <div class='box'>
             <div class='listTwo'>What: ${todo.description}</div>
+        </div>
+        <div class='box'>
             <div class='listThree'>By when: ${todo.dueDate}</div>
+        </div>
+        <div class='box'>
             <div class='listFour'>How urgent: ${todo.priority}</div>
+        </div>
+        <div class='box'>
             <div id='delete${index}' class='hover'>❌</div>
+        <div>
         `
-
 
         const deleteBtn = todoDiv.querySelector(`#delete${index}`)
         deleteBtn.addEventListener("click", () => {
             folder.splice(index, 1)
             refresh()
         })
+
+        const checkBoxMarkIsDone = todoDiv.querySelector(`#isDone${index}`)
+        checkBoxMarkIsDone.checked = todo.isChecked;
+
+        checkBoxMarkIsDone.addEventListener("click", () => {
+            todo.isChecked = !todo.isChecked
+            checkBoxMarkIsDone.isChecked = todo.isChecked
+        })
+
         container.appendChild(todoDiv)
     })
 
@@ -41,7 +63,8 @@ const makeFolder = function (appendTo) {
     let folderValue = folderInput.value
     div.textContent = "📂 " + folderValue
     appendTo.appendChild(div)
-    addHidden();
+    addHidden()
+    makeNewFolder(folderInput.value)
     folderInput.value = ''
 }
 
