@@ -26,7 +26,6 @@ closeNewToDoButton.addEventListener('click', () => {
 
 let newTodoButton = document.querySelector('.newButton')
 newTodoButton.addEventListener('click', () => {
-    console.log('newTodoButton clicked')
     document.querySelector('#addToDoToFolder').classList.toggle('hidden')
     document.querySelector('#addToDoToFolder').classList.toggle('show')
 })
