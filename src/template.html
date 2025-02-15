@@ -20,11 +20,19 @@
         <label for="description">description</label>
         <input type="text" name="description" id="description">
         <label for="when">by when</label>
-        <input type="text" name="when" id="when">
+        <select name="when" id="when">
+            <option value="today">today</option>
+            <option value="tomorrow">tomorrow</option>
+            <option value="when I can">when I can</option>
+        </select>
         <label for="priority">priority</label>
-        <input type="text" name="priority" id="priority">
+        <select name="priority" id="priority">
+            <option value="top">top</option>
+            <option value="middle">middle</option>
+            <option value="bottom">bottom</option>
+        </select>
         <button class="add2">add</button>
-        <button class="close">close</button>
+        <button class="closeToDoButton">close</button>
     </div>
     <div class="container">
         <header>
@@ -38,7 +46,8 @@
             </div>
         </div>
         <div class="todos">
-            <div class="content"></div>
+            <button class="newButton">➕ New to do</button>
+            <div class="content" />
         </div>
     </div>
 </body>
