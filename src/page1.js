@@ -3,7 +3,6 @@ let folder = []
 const makeNewFolder = (title) => {
     let currentFolder = [folder]
     currentFolder.push({title})
-    console.log(currentFolder)
 }
 
 let checkpriority = (todo, toStyle) => {
@@ -23,8 +22,7 @@ let seeMoreValues = (more, todo,) => {
         lookUpValue.classList.toggle('hidden')
         lookUpValue.classList.toggle('show')
         lookUpValueBody.innerHTML = ` 
-        <div class='listOne'>Title: ${todo.title}</div>
-        <div class='listTwo'>What: ${todo.description}</div>
+        <div class='listTwo'>${todo.description}</div>
         `
     })
 }

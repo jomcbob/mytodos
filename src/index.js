@@ -1,11 +1,14 @@
 import "./styles.css"
 import './newArray.js'
 import { makeFolder, addHidden, makeToDo } from "./newArray.js"
+import { makeAFolder } from "./folderlogic.js"
 
+let pushNewFolder = document.querySelector('.folderInput')
 let yourFolders = document.querySelector(".yourFolders")
 let makePopUp = document.querySelector('.add')
 makePopUp.addEventListener('click', () => {
     makeFolder(yourFolders)
+    makeAFolder(pushNewFolder.value)
 })
 
 let addNewFolder = document.querySelector('#newFolder')

@@ -1,3 +1,4 @@
+import { currentFolderImIn } from "./folderlogic"
 import { makeNewFolder, checkpriority, seeMoreValues} from "./page1"
 let inbox = []
 
@@ -71,13 +72,12 @@ const makeFolder = function (appendTo) {
     appendTo.appendChild(div)
     addHidden()
     makeNewFolder(folderInput.value)
-    folderInput.value = ''
 }
 
 const addHidden = function () {
     document.querySelector('#addNewFolder').classList.toggle('hidden')
     document.querySelector('#addNewFolder').classList.toggle('show')
-};
+}
 
 
 
