@@ -1,54 +1,108 @@
 import "./styles.css"
-import './todos.js'
-import { makeToDo } from "./todos.js"
-import { makeFolder } from "./folders"
-import { folderRefresh, toggleHidden } from './presentation'
+import './presentation/addFolder'
+import './presentation/addTodo'
+import { folders, selectedFolderIndex, setSelectedFolderIndex } from "./data/folders"
 
-let yourFolders = document.querySelector(".yourFolders")
-let makePopUp = document.querySelector('.add')
-makePopUp.addEventListener('click', () => {
-    let folderInput = document.querySelector('.folderInput')
-    makeFolder(folderInput.value)
-})
+const folderRefresh = () => {
+    let content = document.querySelector('.yourFolders')
+    content.innerHTML = ''
+    folders.forEach((folder, index) => {
+        const id = `folder-${index}`
+        const div = document.createElement('div')
+        div.classList.add('folderDiv', 'hasHover')
+        if (index == selectedFolderIndex) {
+            div.classList.add('selected')
+        }
+        div.id = id
+        div.innerHTML = `📂 ${folder.name}`
+        content.appendChild(div)
+        div.addEventListener('click', () => {
+            document.querySelector('.content').innerHTML = ''
+            setSelectedFolderIndex(index, refresh)
+        })
+    })
+}
 
-let addNewFolder = document.querySelector('#newFolder')
-addNewFolder.addEventListener('click', () => {
-    toggleHidden()
-})
+const refresh = () => {
+    folderRefresh()
+    const todos = folders[selectedFolderIndex].todos
 
-let close = document.querySelector('.close')
-close.addEventListener('click', () => {
-    toggleHidden()
-})
+    const content = document.querySelector('.content')
+    content.innerHTML = ''
+    const container = document.createElement('div')
 
-let closeNewToDoButton = document.querySelector('.closeToDoButton')
-closeNewToDoButton.addEventListener('click', () => {
-    document.querySelector('#addToDoToFolder').classList.toggle('hidden')
-    document.querySelector('#addToDoToFolder').classList.toggle('show')
-})
+    todos.forEach((todo, index) => {
+        const todoDiv = document.createElement('div')
+        let more = document.createElement('div')
+        more.classList.add('hover')
+        more.textContent = "⊕ more"
+        todoDiv.classList.add('domTodo')
+        todoDiv.innerHTML = `
+        <div class='box'>
+            <input type='checkbox' id='isDone${index}' class='hover' name='check' value='${todo.isChecked}'>
+        </div>
+        <div class='box'>
+            <div class='listOne'>Title: ${todo.title}</div>
+        </div>
+        <div class='box'>
+            <div class='listThree'>By when: ${todo.dueDate}</div>
+        </div>
+        <div class='box'>
+            <div class='listFour'>priority:<div class='toTurnColor'>&nbsp;${todo.priority}&nbsp;</div></div>
+        </div>
+        <div class='box'>
+            <div id='delete${index}' class='hover'>❌</div>
+        <div>
+        `
+        const toStyle = todoDiv.querySelector('.toTurnColor')
+        checkpriority(todo, toStyle)
 
-let newTodoButton = document.querySelector('.newButton')
-newTodoButton.addEventListener('click', () => {
-    document.querySelector('#addToDoToFolder').classList.toggle('hidden')
-    document.querySelector('#addToDoToFolder').classList.toggle('show')
-})
+        todoDiv.appendChild(more)
 
-let input1 = document.querySelector('.toDo')
-let input2 = document.querySelector('#description')
-let input3 = document.querySelector('#when')
-let input4 = document.querySelector('#priority')
-let addTodoButton = document.querySelector('.add2')
-addTodoButton.addEventListener('click', () => {
-    makeToDo(input1.value, input2.value, input3.value, input4.value,)
-    document.querySelector('#addToDoToFolder').classList.toggle('hidden')
-    document.querySelector('#addToDoToFolder').classList.toggle('show')
-    input1.value = ''; input2.value = ''; input3.value = '';
-})
+        seeMoreValues(more, todo)
 
-let closeAbout = document.querySelector('.closeAbout')
-closeAbout.addEventListener('click', () => {
-    document.querySelector('#lookUpValues').classList.toggle('hidden')
-    document.querySelector('#lookUpValues').classList.toggle('show')
-})
+        const deleteBtn = todoDiv.querySelector(`#delete${index}`)
+        deleteBtn.addEventListener("click", () => {
+            todos.splice(index, 1)
+            refresh()
+        })
 
-folderRefresh()
+        const checkBoxMarkIsDone = todoDiv.querySelector(`#isDone${index}`)
+        checkBoxMarkIsDone.checked = todo.isChecked;
+
+        checkBoxMarkIsDone.addEventListener("click", () => {
+            todo.isChecked = !todo.isChecked
+            checkBoxMarkIsDone.isChecked = todo.isChecked
+        })
+
+        container.appendChild(todoDiv)
+    })
+
+    content.appendChild(container)
+}
+
+let checkpriority = (todo, toStyle) => {
+    if (todo.priority == 'high') {
+        toStyle.style.backgroundColor = 'red'
+    } else if (todo.priority == 'medium') {
+        toStyle.style.backgroundColor = 'yellow'
+    } else {
+        toStyle.style.backgroundColor = 'green'
+    }
+}
+
+let seeMoreValues = (more, todo,) => {
+    more.addEventListener("click", () => {
+        let lookUpValueBody = document.querySelector('.appendToThis')
+        let lookUpValue = document.querySelector('#lookUpValues')
+        lookUpValue.classList.toggle('hidden')
+        lookUpValue.classList.toggle('show')
+        lookUpValueBody.innerHTML = ` 
+        <div class='listTwo'>${todo.description}</div>
+        `
+    })
+}
+
+refresh()
+
+export { refresh, seeMoreValues }

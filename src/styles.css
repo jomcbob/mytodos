@@ -164,3 +164,7 @@ input[type="checkbox"] {
     font-size: xx-large;
 }
 
+.selected {
+    background-color: lightgray;
+}
+
