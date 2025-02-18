@@ -168,3 +168,8 @@ input[type="checkbox"] {
     background-color: lightgray;
 }
 
+.folderDiv{
+    display: flex;
+    justify-content: space-between;
+}
+

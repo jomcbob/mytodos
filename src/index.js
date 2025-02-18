@@ -1,7 +1,8 @@
 import "./styles.css"
 import './presentation/addFolder'
 import './presentation/addTodo'
-import { folders, selectedFolderIndex, setSelectedFolderIndex } from "./data/folders"
+import { deleteFolder, folders, selectedFolderIndex, setSelectedFolderIndex, loadFromLocalStorage, saveToLocalStorage } from "./data/folders"
+
 
 const folderRefresh = () => {
     let content = document.querySelector('.yourFolders')
@@ -14,17 +15,26 @@ const folderRefresh = () => {
             div.classList.add('selected')
         }
         div.id = id
-        div.innerHTML = `📂 ${folder.name}`
+        if (index !== 0){
+            div.innerHTML = `📂 ${folder.name} <div id='delete-${index}'>❌</div>`
+        } else {
+            div.innerHTML = `📂 ${folder.name} <div id='delete-${index}'></div>`
+        }
         content.appendChild(div)
         div.addEventListener('click', () => {
             document.querySelector('.content').innerHTML = ''
             setSelectedFolderIndex(index, refresh)
+        })
+        const deleteFolderButton = content.querySelector(`#delete-${index}`)
+        deleteFolderButton.addEventListener("click", (e) => {
+            deleteFolder(index, refresh)
         })
     })
 }
 
 const refresh = () => {
     folderRefresh()
+    saveToLocalStorage()
     const todos = folders[selectedFolderIndex].todos
 
     const content = document.querySelector('.content')
@@ -65,6 +75,7 @@ const refresh = () => {
         deleteBtn.addEventListener("click", () => {
             todos.splice(index, 1)
             refresh()
+            saveToLocalStorage()
         })
 
         const checkBoxMarkIsDone = todoDiv.querySelector(`#isDone${index}`)
@@ -73,6 +84,7 @@ const refresh = () => {
         checkBoxMarkIsDone.addEventListener("click", () => {
             todo.isChecked = !todo.isChecked
             checkBoxMarkIsDone.isChecked = todo.isChecked
+            saveToLocalStorage()
         })
 
         container.appendChild(todoDiv)
@@ -103,6 +115,7 @@ let seeMoreValues = (more, todo,) => {
     })
 }
 
+loadFromLocalStorage()
 refresh()
 
 export { refresh, seeMoreValues }
