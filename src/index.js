@@ -1,24 +1,24 @@
 import "./styles.css"
-import './newArray.js'
-import { makeFolder, addHidden, makeToDo } from "./newArray.js"
-import { makeAFolder } from "./folderlogic.js"
+import './todos.js'
+import { makeToDo } from "./todos.js"
+import { makeFolder } from "./folders"
+import { folderRefresh, toggleHidden } from './presentation'
 
-let pushNewFolder = document.querySelector('.folderInput')
 let yourFolders = document.querySelector(".yourFolders")
 let makePopUp = document.querySelector('.add')
 makePopUp.addEventListener('click', () => {
-    makeFolder(yourFolders)
-    makeAFolder(pushNewFolder.value)
+    let folderInput = document.querySelector('.folderInput')
+    makeFolder(folderInput.value)
 })
 
 let addNewFolder = document.querySelector('#newFolder')
 addNewFolder.addEventListener('click', () => {
-    addHidden()
+    toggleHidden()
 })
 
 let close = document.querySelector('.close')
 close.addEventListener('click', () => {
-    addHidden()
+    toggleHidden()
 })
 
 let closeNewToDoButton = document.querySelector('.closeToDoButton')
@@ -51,4 +51,4 @@ closeAbout.addEventListener('click', () => {
     document.querySelector('#lookUpValues').classList.toggle('show')
 })
 
-
+folderRefresh()
