@@ -2,6 +2,7 @@ import "./styles.css"
 import './presentation/addFolder'
 import './presentation/addTodo'
 import { deleteFolder, folders, selectedFolderIndex, setSelectedFolderIndex, loadFromLocalStorage, saveToLocalStorage } from "./data/folders"
+// import { checkIfChecked } from "./presentation/addTodo"
 
 
 const folderRefresh = () => {
@@ -70,6 +71,8 @@ const refresh = () => {
         todoDiv.appendChild(more)
 
         seeMoreValues(more, todo)
+        
+        if (todo.isChecked) todoDiv.classList.add('checked')
 
         const deleteBtn = todoDiv.querySelector(`#delete${index}`)
         deleteBtn.addEventListener("click", () => {
@@ -85,6 +88,7 @@ const refresh = () => {
             todo.isChecked = !todo.isChecked
             checkBoxMarkIsDone.isChecked = todo.isChecked
             saveToLocalStorage()
+            refresh()
         })
 
         container.appendChild(todoDiv)

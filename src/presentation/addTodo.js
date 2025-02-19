@@ -37,3 +37,13 @@ closeAbout.addEventListener('click', () => {
     document.querySelector('#lookUpValues').classList.toggle('hidden')
     document.querySelector('#lookUpValues').classList.toggle('show')
 })
+
+// const checkIfChecked = (todo) => {
+//     if (todo == false){
+//         todo.classList.add('checked')
+//     } else if (todo == false){
+//         todo.classList.remove('checked')
+//     } else return
+// }
+
+// export { checkIfChecked }
