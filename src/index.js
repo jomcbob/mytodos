@@ -71,7 +71,8 @@ const refresh = () => {
         todoDiv.appendChild(more)
 
         seeMoreValues(more, todo)
-        
+
+        if (todo.isChecked) todoDiv.querySelector('.listOne').classList.add('lineThrough')
         if (todo.isChecked) todoDiv.classList.add('checked')
 
         const deleteBtn = todoDiv.querySelector(`#delete${index}`)
