@@ -2,7 +2,7 @@ import "./styles.css"
 import './presentation/addFolder'
 import './presentation/addTodo'
 import { deleteFolder, folders, selectedFolderIndex, setSelectedFolderIndex, loadFromLocalStorage, saveToLocalStorage } from "./data/folders"
-import { checkIfChecked, editValues, formatDate } from "./presentation/addTodo"
+import { checkIfChecked, editValues, formatDate, sortToDos } from "./presentation/addTodo"
 
 
 const folderRefresh = () => {
@@ -148,19 +148,13 @@ credit.addEventListener('click', () => {
 
 let sortByPriorityButtonHigh = document.querySelector('.sortByPriorityHigh')
 sortByPriorityButtonHigh.addEventListener('click', () => {
-    folders[selectedFolderIndex].todos.sort((a, b) => {
-        const priorityOrder = { high: 1, medium: 2, low: 3 }
-        return priorityOrder[a.priority] - priorityOrder[b.priority]
-    })
+    sortToDos(3, 2, 1)
     refresh()
 })
 
 let sortByPriorityButtonLow = document.querySelector('.sortByPriorityLow')
 sortByPriorityButtonLow.addEventListener('click', () => {
-    folders[selectedFolderIndex].todos.sort((a, b) => {
-        const priorityOrder = { high: 3, medium: 2, low: 1 }
-        return priorityOrder[a.priority] - priorityOrder[b.priority]
-    })
+    sortToDos(1, 2, 3)
     refresh()
 })
 

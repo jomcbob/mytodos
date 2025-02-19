@@ -1,4 +1,4 @@
-import { makeToDo } from '../data/folders'
+import { makeToDo, folders, selectedFolderIndex } from '../data/folders'
 import { refresh } from '../index'
 
 let newTodoButton = document.querySelector('.newButton')
@@ -87,7 +87,14 @@ function formatDate(dueDate) {
     }
 }
 
+let sortToDos = (high, medium, low) => {
+    folders[selectedFolderIndex].todos.sort((a, b) => {
+        const priorityOrder = { high: low, medium: medium, low: high }
+        return priorityOrder[a.priority] - priorityOrder[b.priority]
+    })
+}
 
 
 
-export { checkIfChecked, editValues, formatDate }
+
+export { checkIfChecked, editValues, formatDate, sortToDos }
