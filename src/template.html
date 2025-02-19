@@ -9,12 +9,19 @@
 
 <body>
     <div id="addNewFolder" class="hidden">
-        <label for="newFolderName">new folder name</label>
-        <input type="text" name="newFolderName" class="folderInput">
-        <button class="add">add</button>
-        <button class="close">close</button>
+    <div class="folderFormBackground">
+        <div class="textinput">
+            <label for="newFolderName">new folder name</label>
+            <input type="text" name="newFolderName" class="folderInput">
+        </div>
+        <div class="buttons">
+            <button class="add">add</button>
+            <button class="close">close</button>
+        </div>
+    </div>
     </div>
     <div id="addToDoToFolder" class="hidden">
+    <div class="folderFormBackground">
         <label for="ToDo">title</label>
         <input type="text" name="toDo" class="toDo">
         <label for="description">description</label>
@@ -30,6 +37,14 @@
         <button class="add2">add</button>
         <button class="closeToDoButton">close</button>
     </div>
+    </div>
+    <div class="creditForPhotos hidden">
+        <div class="backgroundForCredit">
+            <div>Photo by <a href="https://unsplash.com/@keithmisner?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"> Keith Misner</a> on <a href="https://unsplash.com/photos/brown-wooden-board-h0Vxgz5tyXA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a></div>
+            <div>Photo by <a href="https://unsplash.com/@eilisgarvey?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Eilis Garvey</a> on <a href="https://unsplash.com/photos/brown-wooden-book-shelf-with-books-fhOQfT1eVEA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a></div>
+            <div>Photo by <a href="https://unsplash.com/@glenna1984?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Glenn Abelson</a> on <a href="https://unsplash.com/photos/white-clouds-and-blue-sky-Hwz4MZjzxTM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a></div>
+        </div>
+    </div>
 
     <div id="lookUpValues" class="hidden">
         <div class="description">description</div>
@@ -42,14 +57,14 @@
     </div>
 
     <div class="container">
+        <div class="fixed">⊕</div>
         <header>
-            <h1>welcome please have fun</h1>
+            <h1>welcome please make a folder or task to get started</h1>
         </header>
         <div class="sidebar">
             <h1 class="folders">Your folders</h1>
             <h2 id="newFolder" class="hasHover">⊕ new Folder</h2>
             <div class="yourFolders">
-                <!-- <div class="folderDiv hasHover">📂 Inbox</div> -->
             </div>
         </div>
         <div class="todos">

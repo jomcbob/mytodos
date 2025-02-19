@@ -115,6 +115,12 @@ let seeMoreValues = (more, todo,) => {
     })
 }
 
+let credit = document.querySelector('.fixed')
+credit.addEventListener('click', () => {
+    document.querySelector('.creditForPhotos').classList.toggle('hidden')
+    document.querySelector('.creditForPhotos').classList.toggle('show')
+})
+
 loadFromLocalStorage()
 refresh()
 

@@ -56,4 +56,6 @@ const setSelectedFolderIndex = (index, refresh) => {
     refresh()
 }
 
+
+
 export { deleteFolder, folders, makeFolder, makeToDo, selectedFolderIndex, setSelectedFolderIndex, loadFromLocalStorage, saveToLocalStorage }
