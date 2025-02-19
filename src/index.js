@@ -2,7 +2,7 @@ import "./styles.css"
 import './presentation/addFolder'
 import './presentation/addTodo'
 import { deleteFolder, folders, selectedFolderIndex, setSelectedFolderIndex, loadFromLocalStorage, saveToLocalStorage } from "./data/folders"
-// import { checkIfChecked } from "./presentation/addTodo"
+import { checkIfChecked, editValues, formatDate } from "./presentation/addTodo"
 
 
 const folderRefresh = () => {
@@ -16,7 +16,7 @@ const folderRefresh = () => {
             div.classList.add('selected')
         }
         div.id = id
-        if (index !== 0){
+        if (index !== 0) {
             div.innerHTML = `📂 ${folder.name} <div id='delete-${index}'>❌</div>`
         } else {
             div.innerHTML = `📂 ${folder.name} <div id='delete-${index}'></div>`
@@ -56,7 +56,7 @@ const refresh = () => {
             <div class='listOne'>Title: ${todo.title}</div>
         </div>
         <div class='box'>
-            <div class='listThree'>By when: ${todo.dueDate}</div>
+            <div class='listThree'>Due: ${formatDate(todo.dueDate)}</div>
         </div>
         <div class='box'>
             <div class='listFour'>priority:<div class='toTurnColor'>&nbsp;${todo.priority}&nbsp;</div></div>
@@ -72,8 +72,7 @@ const refresh = () => {
 
         seeMoreValues(more, todo)
 
-        if (todo.isChecked) todoDiv.querySelector('.listOne').classList.add('lineThrough')
-        if (todo.isChecked) todoDiv.classList.add('checked')
+        checkIfChecked(todo, todoDiv)
 
         const deleteBtn = todoDiv.querySelector(`#delete${index}`)
         deleteBtn.addEventListener("click", () => {
@@ -103,7 +102,7 @@ let checkpriority = (todo, toStyle) => {
         toStyle.style.backgroundColor = 'red'
     } else if (todo.priority == 'medium') {
         toStyle.style.backgroundColor = 'yellow'
-    } else {
+    } else if (todo.priority == 'low') {
         toStyle.style.backgroundColor = 'green'
     }
 }
@@ -112,11 +111,32 @@ let seeMoreValues = (more, todo,) => {
     more.addEventListener("click", () => {
         let lookUpValueBody = document.querySelector('.appendToThis')
         let lookUpValue = document.querySelector('#lookUpValues')
+        let toDoDivDescription = document.querySelector('.toDoDivDescription')
         lookUpValue.classList.toggle('hidden')
         lookUpValue.classList.toggle('show')
         lookUpValueBody.innerHTML = ` 
-        <div class='listTwo'>${todo.description}</div>
+            <div id="addToDoToFolder">
+                <div class="folderFormBackground">
+                    <label for="ToDo">title</label>
+                    <input type="text" name="toDo" id="editTitle" value='${todo.title}'>
+                    <label for="description">description</label>
+                    <input type="text" name="description" id="editDescription" value='${todo.description}'>
+                    <label for="when">by when</label>
+                    <input type="date" id="editDate" value='$${formatDate(todo.dueDate)}'>
+                    <label for="priority">priority</label>
+                    <select name="priority" id="editPriority" value='${todo.priority}'>
+                        <option value="high" class="red">high</option>
+                        <option value="medium" class="yellow">medium</option>
+                        <option value="low" class="green">low</option>
+                    </select>
+                    <button class="addEditedValues">add</button>
+                </div>
+            </div>
         `
+        toDoDivDescription.textContent = todo.description
+        lookUpValueBody.querySelector('.addEditedValues').addEventListener('click', () => {
+            editValues(todo)
+        })
     })
 }
 
@@ -124,6 +144,30 @@ let credit = document.querySelector('.fixed')
 credit.addEventListener('click', () => {
     document.querySelector('.creditForPhotos').classList.toggle('hidden')
     document.querySelector('.creditForPhotos').classList.toggle('show')
+})
+
+let sortByPriorityButtonHigh = document.querySelector('.sortByPriorityHigh')
+sortByPriorityButtonHigh.addEventListener('click', () => {
+    folders[selectedFolderIndex].todos.sort((a, b) => {
+        const priorityOrder = { high: 1, medium: 2, low: 3 }
+        return priorityOrder[a.priority] - priorityOrder[b.priority]
+    })
+    refresh()
+})
+
+let sortByPriorityButtonLow = document.querySelector('.sortByPriorityLow')
+sortByPriorityButtonLow.addEventListener('click', () => {
+    folders[selectedFolderIndex].todos.sort((a, b) => {
+        const priorityOrder = { high: 3, medium: 2, low: 1 }
+        return priorityOrder[a.priority] - priorityOrder[b.priority]
+    })
+    refresh()
+})
+
+const clearCompletedButton = document.querySelector('.clearCompleted')
+clearCompletedButton.addEventListener('click', () => {
+    folders[selectedFolderIndex].todos = folders[selectedFolderIndex].todos.filter(todo => !todo.isChecked)
+    refresh()
 })
 
 loadFromLocalStorage()

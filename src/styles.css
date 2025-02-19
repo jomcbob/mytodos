@@ -142,7 +142,7 @@ input[type="checkbox"] {
     background:rgb(0, 0, 0, .5);
     color: white;
     width: 40vw;
-    height: 40vw;
+    height: 90svh;
     border-radius: 5px;
     display: flex;
     justify-content: start;
@@ -163,11 +163,12 @@ input[type="checkbox"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    background:rgba(68, 32, 32, 0.8);
+    border-bottom: 2px solid white;
     color: white;
-    padding: 2vh;
     border-radius: 5px;
     font-size: xx-large;
+    margin:  1vh 0;
+    background:linear-gradient(25deg, red, green) ;
 }
 
 .selected {
@@ -214,7 +215,7 @@ input[type="checkbox"] {
     flex-direction: column;
 }
 
-.folderFormBackground > .buttons > button {
+ .buttons > button {
     width: 21vw;
     background-color: #333;
     border: none;
@@ -244,4 +245,28 @@ input[type="checkbox"] {
 .lineThrough {
     text-decoration-line: line-through;
 }
+
+.addEditedValues{
+    width: 21vw;
+    background-color: #333;
+    border: none;
+    color: white;
+    height: 3vh;
+    font-size: 2vh;
+    margin-bottom: 2vh;
+}
+
+.addEditedValues:hover {
+    background-color: white;
+    color: #333;
+}
+
+.contentButtons{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+
 
