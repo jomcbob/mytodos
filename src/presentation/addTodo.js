@@ -65,27 +65,35 @@ const checkIfChecked = (todo, todoDiv) => {
 }
 
 function formatDate(dueDate) {
+    // If no due date is provided, use today's date
     if (dueDate === "") {
-        dueDate = new Date().toISOString().split('T')[0]
+        dueDate = new Date().toISOString().split('T')[0]; // Use the current date + 1 day without time
     }
-    const now = new Date()
-    const targetDate = new Date(dueDate)
-    // Set both dates to midnight (00:00:00) in UTC to avoid time zone issues
-    const currentUTC = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())
-    const targetUTC = Date.UTC(targetDate.getUTCFullYear(), targetDate.getUTCMonth(), targetDate.getUTCDate())
-    const timeDiff = targetUTC - currentUTC
-    const daysLeft = Math.floor(timeDiff / (1000 * 60 * 60 * 24))
 
-    if (daysLeft === 0) {
-        return 'Today'
-    } else if (daysLeft === 1) {
-        return `in ${daysLeft} day`
+    const now = new Date();
+    const targetDate = new Date(dueDate);
+
+    // Normalize both dates to midnight in the local timezone (removes time information)
+    now.setHours(0, 0, 0, 0);
+    targetDate.setHours(0, 0, 0, 0);
+
+    // Calculate the difference in days between the two dates
+    const oneDayInMs = 24 * 60 * 60 * 1000; // Milliseconds in one day
+    const daysLeft = Math.round((targetDate - now) / oneDayInMs);
+
+    // Return the appropriate message based on the difference
+    if (daysLeft === -1) {
+        return 'Today';
+    } else if (daysLeft === 0) {
+        return `in ${daysLeft + 1} day`;
     } else if (daysLeft > 0) {
-        return `in ${daysLeft} days`
+        return `in ${daysLeft + 1} days`;
     } else {
-        return 'Past due'
+        return 'Past due';
     }
 }
+
+
 
 let sortToDos = (high, medium, low) => {
     folders[selectedFolderIndex].todos.sort((a, b) => {
